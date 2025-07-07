@@ -36,6 +36,9 @@ const DashboardLayout = () => {
     navigate('/login');
   };
 
+  // Sidebar width depending on state
+  const sidebarWidth = sidebarOpen ? 256 : 64; // in pixels
+
   return (
     <div className="flex">
       {/* Sidebar */}
@@ -50,17 +53,17 @@ const DashboardLayout = () => {
           </h1>
         </div>
         <nav className="flex-1 space-y-1 px-2">
-            <SidebarLink to="/dashboard" icon={LayoutDashboard} label={sidebarOpen && 'Dashboard'} />
-            <SidebarLink to="/dashboard/manage" icon={ArrowRightLeft} label={sidebarOpen && 'Manage'} />
-            <SidebarLink to="/dashboard/chargeback" icon={Banknote} label={sidebarOpen && 'ChargeBack'} />
-            <SidebarLink to="/dashboard/refund-transactions" icon={FileText} label={sidebarOpen && 'Refund Transactions'} />
-            <SidebarLink to="/dashboard/pay-profile" icon={User2} label={sidebarOpen && 'Pay Profile'} />
-            <SidebarLink to="/dashboard/support-ticket" icon={Ticket} label={sidebarOpen && 'Support Ticket'} />
-            <SidebarLink to="/dashboard/settlement-reports" icon={HandCoins} label={sidebarOpen && 'Settlement Reports'} />
-            <SidebarLink to="/dashboard/reports" icon={FileBarChart2} label={sidebarOpen && 'Reports'} />
-            <SidebarLink to="/dashboard/settings" icon={Settings} label={sidebarOpen && 'Settings'} />
-            <SidebarLink to="/dashboard/booking-ticket" icon={Ticket} label={sidebarOpen && 'Booking Ticket'} />
-            <SidebarLink to="/dashboard/mobile-app" icon={Smartphone} label={sidebarOpen && 'Mobile App'} />
+          <SidebarLink to="/dashboard" icon={LayoutDashboard} label={sidebarOpen && 'Dashboard'} />
+          <SidebarLink to="/dashboard/manage" icon={ArrowRightLeft} label={sidebarOpen && 'Manage'} />
+          <SidebarLink to="/dashboard/chargeback" icon={Banknote} label={sidebarOpen && 'ChargeBack'} />
+          <SidebarLink to="/dashboard/refund-transactions" icon={FileText} label={sidebarOpen && 'Refund Transactions'} />
+          <SidebarLink to="/dashboard/pay-profile" icon={User2} label={sidebarOpen && 'Pay Profile'} />
+          <SidebarLink to="/dashboard/support-ticket" icon={Ticket} label={sidebarOpen && 'Support Ticket'} />
+          <SidebarLink to="/dashboard/settlement-reports" icon={HandCoins} label={sidebarOpen && 'Settlement Reports'} />
+          <SidebarLink to="/dashboard/reports" icon={FileBarChart2} label={sidebarOpen && 'Reports'} />
+          <SidebarLink to="/dashboard/settings" icon={Settings} label={sidebarOpen && 'Settings'} />
+          <SidebarLink to="/dashboard/booking-ticket" icon={Ticket} label={sidebarOpen && 'Booking Ticket'} />
+          <SidebarLink to="/dashboard/mobile-app" icon={Smartphone} label={sidebarOpen && 'Mobile App'} />
         </nav>
         <div className="px-4 pb-5 mt-auto">
           <button
@@ -72,10 +75,15 @@ const DashboardLayout = () => {
         </div>
       </aside>
 
-      {/* Main content area */}
-      <div className={`flex-1 min-h-screen flex flex-col md:ml-${sidebarOpen ? '64' : '16'}`}>
+      {/* Main content area with dynamic left margin */}
+      <div
+        className="flex-1 flex flex-col min-h-screen"
+        style={{ marginLeft: sidebarWidth }}
+      >
         {/* Fixed header */}
-        <header className="fixed top-0 left-0 md:left-64 right-0 h-16 bg-white shadow z-30 flex items-center justify-between px-4">
+        <header className="fixed top-0 left-0 right-0 h-16 bg-white shadow z-30 flex items-center justify-between px-4"
+          style={{ marginLeft: sidebarWidth }}
+        >
           <button className="text-gray-600 md:hidden" onClick={() => setSidebarOpen(!sidebarOpen)}>
             ☰
           </button>
