@@ -1,0 +1,102 @@
+import React from 'react';
+import { Download, Filter } from 'lucide-react';
+
+const tabs = [
+  'Transaction',
+  'Subscription Payment',
+  'Invoice',
+  'Pay Button',
+  'Easy Collect',
+  'Collecting Order',
+  'Settlement Vendors',
+  'Coupon',
+  'Cart',
+  'Payment Orders',
+];
+
+const Manage = () => {
+  return (
+    <div className="flex flex-col min-h-screen bg-gray-50">
+      {/* Tabs */}
+      <div className="bg-white px-4 py-3 shadow-sm">
+        <div className="flex gap-4 flex-wrap">
+          {tabs.map((tab, idx) => (
+            <button
+              key={idx}
+              className={`px-3 py-1.5 rounded-md text-sm font-medium ${
+                tab === 'Transaction'
+                  ? 'bg-cyan-500 text-white'
+                  : 'text-gray-700 hover:text-cyan-600'
+              }`}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Actions */}
+      <div className="px-4 py-4 flex flex-wrap items-center gap-3 bg-white border-b">
+        <button className="bg-cyan-500 text-white text-sm px-4 py-2 rounded-md">
+          View Settlement
+        </button>
+        <button className="bg-cyan-500 text-white text-sm px-4 py-2 rounded-md">
+          Refresh
+        </button>
+        <div className="ml-auto flex gap-3">
+          <button className="flex items-center gap-2 bg-cyan-500 text-white text-sm px-4 py-2 rounded-md">
+            <Download size={16} /> Download
+          </button>
+          <button className="flex items-center gap-2 bg-cyan-500 text-white text-sm px-4 py-2 rounded-md">
+            <Filter size={16} /> Filter
+          </button>
+        </div>
+      </div>
+
+      {/* Info */}
+      <div className="px-4 text-sm text-gray-700 mt-4">
+        Currently we are displaying last 7 days report. For more details please click on Filter
+      </div>
+
+      {/* Table */}
+      <div className="overflow-auto mt-4 px-4 flex-1">
+        <table className="min-w-full bg-white border mt-2 rounded-md overflow-hidden">
+          <thead className="bg-gray-100 text-gray-700 text-sm">
+            <tr>
+              {[
+                'Action',
+                'Transaction Id',
+                'Unique Request Id',
+                'Transaction Date Time',
+                'Payment Type',
+                'Account No',
+                'Authorized Amount',
+                'Status',
+                'Transaction Status',
+              ].map((head, i) => (
+                <th key={i} className="px-4 py-2 border-b text-left whitespace-nowrap">
+                  {head}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td colSpan="9" className="text-center text-gray-500 py-6">
+                No data to display
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div className="text-sm text-gray-600 mt-2">0 total</div>
+      </div>
+
+      {/* Footer */}
+      <footer className="text-center py-4 text-xs text-gray-500">
+        Copyright © 2025 - Upyogu. All Rights Reserved.
+      </footer>
+    </div>
+  );
+};
+
+export default Manage;
